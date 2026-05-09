@@ -1,0 +1,35 @@
+# Slip 2
+
+## Q1) Reverse String in Node.js
+
+```javascript
+let str = "Full Stack!";
+let rev = str.split('').reverse().join('');
+console.log(rev);
+```
+
+## Q2) Append One File into Another
+
+```javascript
+const fs = require('fs');
+const readline = require('readline');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question('Enter first file name: ', (file1) => {
+    rl.question('Enter second file name: ', (file2) => {
+
+        let data = fs.readFileSync(file1, 'utf8');
+        fs.appendFileSync(file2, data);
+
+        console.log('File appended successfully');
+        rl.close();
+    });
+});
+```
+
+---
+
