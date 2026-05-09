@@ -1,0 +1,71 @@
+# Slip 22
+
+## Q1) Employee Registration Validation
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function validate(){
+    let name = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
+
+    let namePattern = /^[A-Za-z ]+$/;
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if(!namePattern.test(name)){
+        alert('Invalid Name');
+        return false;
+    }
+
+    if(!emailPattern.test(email)){
+        alert('Invalid Email');
+        return false;
+    }
+
+    alert('Registration Successful');
+}
+</script>
+</head>
+<body>
+<form onsubmit="return validate()">
+Name: <input type="text" id="name"><br><br>
+Email: <input type="text" id="email"><br><br>
+<input type="submit" value="Register">
+</form>
+</body>
+</html>
+```
+
+## Q2) Event Driven Application
+
+(Use Slip 7 Q2 code)
+
+---
+
+# Slip 24
+
+## Q1) eLearning System using Node.js
+
+```javascript
+const http = require('http');
+
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type':'text/html'});
+
+    res.write('<h1>eLearning System</h1>');
+    res.write('<h3>Courses Available:</h3>');
+    res.write('<ul>');
+    res.write('<li>Java</li>');
+    res.write('<li>Python</li>');
+    res.write('<li>Full Stack Development</li>');
+    res.write('</ul>');
+
+    res.end();
+}).listen(3000);
+```
+
+## Q2) AngularJS Username Validation
+
+(Use Slip 5 Q2 code)
