@@ -1,0 +1,109 @@
+
+
+# Slip 7
+
+## Q1) Current Date and Time using Interval Service
+
+```html
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<h2>{{time}}</h2>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $interval){
+    $interval(function(){
+        $scope.time = new Date().toLocaleString();
+    }, 1000);
+});
+</script>
+</body>
+</html>
+```
+
+## Q2) Event Driven Application
+
+```javascript
+const events = require('events');
+const eventEmitter = new events.EventEmitter();
+
+const myEventHandler = function () {
+    console.log('Event Occurred!');
+}
+
+eventEmitter.on('display', myEventHandler);
+
+eventEmitter.emit('display');
+```
+
+---
+
+# Slip 8
+
+## Q1) Simple Web Server
+
+```javascript
+const http = require('http');
+
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type':'text/html'});
+    res.write('<h1>Welcome to Node.js Web Server</h1>');
+    res.end();
+}).listen(3000);
+
+console.log('Server running on port 3000');
+```
+
+## Q2) Display 10 Student Details using ng-repeat
+
+```html
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<table border="1">
+<tr>
+<th>Roll No</th>
+<th>Name</th>
+<th>Course</th>
+</tr>
+
+<tr ng-repeat="s in students">
+<td>{{s.roll}}</td>
+<td>{{s.name}}</td>
+<td>{{s.course}}</td>
+</tr>
+</table>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope){
+    $scope.students = [
+        {roll:1,name:'Amit',course:'MSc'},
+        {roll:2,name:'Rahul',course:'MSc'},
+        {roll:3,name:'Sneha',course:'MSc'},
+        {roll:4,name:'Pooja',course:'MSc'},
+        {roll:5,name:'Karan',course:'MSc'},
+        {roll:6,name:'Neha',course:'MSc'},
+        {roll:7,name:'Rohit',course:'MSc'},
+        {roll:8,name:'Anjali',course:'MSc'},
+        {roll:9,name:'Priya',course:'MSc'},
+        {roll:10,name:'Ajay',course:'MSc'}
+    ];
+});
+</script>
+</body>
+</html>
+```
+
+---
+
+
