@@ -1,0 +1,79 @@
+
+
+# Slip 17
+
+## Q1) SPA using ng-view
+
+```html
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+</head>
+<body>
+
+<a href="#/java">Java</a> |
+<a href="#/python">Python</a> |
+<a href="#/web">Web</a>
+
+<div ng-view></div>
+
+<script>
+var app = angular.module('myApp', ['ngRoute']);
+
+app.config(function($routeProvider){
+    $routeProvider
+    .when('/java', {
+        template: '<h2>Java Syllabus</h2>'
+    })
+    .when('/python', {
+        template: '<h2>Python Syllabus</h2>'
+    })
+    .when('/web', {
+        template: '<h2>Full Stack Development Syllabus</h2>'
+    });
+});
+</script>
+</body>
+</html>
+```
+
+## Q2) Display Student Details using ng-repeat
+
+(Use Slip 8 Q2 code)
+
+---
+
+# Slip 20
+
+## Q1) Create Student Database and Table
+
+```javascript
+const mysql = require('mysql');
+
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: ''
+});
+
+con.connect(function(err){
+    if(err) throw err;
+
+    console.log('Connected');
+
+    con.query('CREATE DATABASE studentdb', function(err){
+        if(err) throw err;
+        console.log('Database Created');
+    });
+});
+```
+
+## Q2) AngularJS Username Validation
+
+(Use Slip 5 Q2 code)
+
+---
+
+
