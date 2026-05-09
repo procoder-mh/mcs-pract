@@ -1,0 +1,88 @@
+
+# Slip 1
+
+## Q1) Login Form Validation
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login Form</title>
+<script>
+function validateForm() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    let passwordPattern = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
+
+    if(!emailPattern.test(email)) {
+        alert("Invalid Email");
+        return false;
+    }
+
+    if(!passwordPattern.test(password)) {
+        alert("Password must contain 8 characters, one uppercase and one number");
+        return false;
+    }
+
+    alert("Login Successful");
+}
+</script>
+</head>
+<body>
+<form onsubmit="return validateForm()">
+Email: <input type="text" id="email"><br><br>
+Password: <input type="password" id="password"><br><br>
+<input type="submit" value="Login">
+</form>
+</body>
+</html>
+```
+
+## Q2) Student Registration Validation
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function validate() {
+    let fname = document.getElementById("fname").value;
+    let lname = document.getElementById("lname").value;
+    let age = document.getElementById("age").value;
+
+    let namePattern = /^[A-Za-z]+$/;
+
+    if(!namePattern.test(fname)) {
+        alert("Invalid First Name");
+        return false;
+    }
+
+    if(!namePattern.test(lname)) {
+        alert("Invalid Last Name");
+        return false;
+    }
+
+    if(age < 18 || age > 50) {
+        alert("Age must be between 18 and 50");
+        return false;
+    }
+
+    alert("Registration Successful");
+}
+</script>
+</head>
+<body>
+<form onsubmit="return validate()">
+First Name: <input type="text" id="fname"><br><br>
+Last Name: <input type="text" id="lname"><br><br>
+Age: <input type="number" id="age"><br><br>
+<input type="submit" value="Register">
+</form>
+</body>
+</html>
+```
+
+---
+
