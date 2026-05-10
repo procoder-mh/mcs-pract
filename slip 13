@@ -1,0 +1,14 @@
+# Slip 13
+
+## Q1) Convert HELLO WORLD into Lowercase
+
+```javascript
+let str = 'HELLO WORLD!';
+console.log(str.toLowerCase());
+```
+
+## Q2) Student Registration Validation
+
+(Use Slip 1 Q2 code)
+
+---
