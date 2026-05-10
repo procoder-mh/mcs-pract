@@ -1,0 +1,27 @@
+
+# Slip 16
+
+## Q1) Recipe Book using Node.js
+
+```javascript
+const http = require('http');
+
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type':'text/html'});
+
+    res.write('<h1>Recipe Book</h1>');
+    res.write('<h3>1. Tea</h3>');
+    res.write('<p>Boil water, add tea powder, milk and sugar.</p>');
+
+    res.write('<h3>2. Maggi</h3>');
+    res.write('<p>Boil water, add noodles and tastemaker.</p>');
+
+    res.end();
+}).listen(3000);
+```
+
+## Q2) Event Driven Application
+
+(Use Slip 7 Q2 code)
+
+---
