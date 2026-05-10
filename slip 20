@@ -1,0 +1,30 @@
+# Slip 20
+
+## Q1) Create Student Database and Table
+
+```javascript
+const mysql = require('mysql');
+
+const con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: ''
+});
+
+con.connect(function(err){
+    if(err) throw err;
+
+    console.log('Connected');
+
+    con.query('CREATE DATABASE studentdb', function(err){
+        if(err) throw err;
+        console.log('Database Created');
+    });
+});
+```
+
+## Q2) AngularJS Username Validation
+
+(Use Slip 5 Q2 code)
+
+---
