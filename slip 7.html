@@ -1,0 +1,48 @@
+
+
+# Slip 7
+
+## Q1) Current Date and Time using Interval Service
+
+```html
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<h2>{{time}}</h2>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $interval){
+    $interval(function(){
+        $scope.time = new Date().toLocaleString();
+    }, 1000);
+});
+</script>
+</body>
+</html>
+```
+
+## Q2) Event Driven Application
+
+```javascript
+const events = require('events');
+const eventEmitter = new events.EventEmitter();
+
+const myEventHandler = function () {
+    console.log('Event Occurred!');
+}
+
+eventEmitter.on('display', myEventHandler);
+
+eventEmitter.emit('display');
+```
+
+---
+
+
+
+
