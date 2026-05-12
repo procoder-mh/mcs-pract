@@ -3,47 +3,143 @@
 
 ## Q1) Concatenate Two Strings
 
-```javascript
+// file: concatenate.js
+
+// Import HTTP module
 const http = require('http');
-const url = require('url');
+const querystring = require('querystring');
 
-http.createServer(function(req, res){
-    let q = url.parse(req.url, true).query;
+// Create Server
+http.createServer((req, res) => {
 
-    let str1 = q.str1 || '';
-    let str2 = q.str2 || '';
+    // Display HTML Form
+    if (req.method === "GET") {
 
-    res.writeHead(200, {'Content-Type':'text/html'});
-    res.write('Concatenated String: ' + str1 + str2);
-    res.end();
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+
+        res.write(`
+            <html>
+            <body>
+
+                <h2>Concatenate Two Strings</h2>
+
+                <form method="POST">
+
+                    Enter First String:
+                    <input type="text" name="str1">
+                    <br><br>
+
+                    Enter Second String:
+                    <input type="text" name="str2">
+                    <br><br>
+
+                    <input type="submit" value="Concatenate">
+
+                </form>
+
+            </body>
+            </html>
+        `);
+
+        res.end();
+    }
+
+    // Handle Form Submission
+    else if (req.method === "POST") {
+
+        let body = "";
+
+        req.on("data", chunk => {
+            body += chunk.toString();
+        });
+
+        req.on("end", () => {
+
+            // Parse Form Data
+            let data = querystring.parse(body);
+
+            let str1 = data.str1;
+            let str2 = data.str2;
+
+            // Concatenate Strings
+            let result = str1 + str2;
+
+            // Display Result
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+
+            res.write(`
+                <html>
+                <body>
+
+                    <h2>Concatenated String</h2>
+
+                    <p>Result: ${result}</p>
+
+                </body>
+                </html>
+            `);
+
+            res.end();
+        });
+    }
+
 }).listen(3000);
-```
+
+console.log("Server running at http://localhost:3000");
 
 ## Q2) Open Requested File and Return Content
 
-```javascript
+/ file: server.js
+
+// Import Modules
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
 
-http.createServer(function(req, res){
-    let q = url.parse(req.url, true);
-    let filename = '.' + q.pathname;
+// Create Server
+http.createServer((req, res) => {
 
-    fs.readFile(filename, function(err, data){
-        if(err){
-            res.writeHead(404, {'Content-Type':'text/html'});
-            return res.end('404 File Not Found');
+    // Parse URL
+    let q = url.parse(req.url, true);
+
+    // Requested File Name
+    let filename = "." + q.pathname;
+
+    // Read File
+    fs.readFile(filename, function(err, data) {
+
+        // Handle Error
+        if (err) {
+
+            res.writeHead(404, { 'Content-Type': 'text/html' });
+
+            return res.end("404 Error: File Not Found");
         }
 
-        res.writeHead(200, {'Content-Type':'text/html'});
+        // Display File Content
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+
         res.write(data);
+
         return res.end();
     });
+
 }).listen(3000);
-```
 
----
+console.log("Server running at http://localhost:3000");
 
+
+Example HTML File (index.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+
+    <h1>Welcome to Node.js Server</h1>
+
+</body>
+</html>
 
 
