@@ -4,46 +4,134 @@
 
 ## Q1) SPA using ng-view
 
-```html
 <!DOCTYPE html>
 <html ng-app="myApp">
+
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+    <title>M.Sc (CS) Sem-II Syllabus</title>
+
+    <!-- AngularJS Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- AngularJS Route Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+
+    <script>
+
+        // Create AngularJS App
+        var app = angular.module("myApp", ["ngRoute"]);
+
+        // Configure Routes
+        app.config(function($routeProvider) {
+
+            $routeProvider
+
+            .when("/java", {
+                template: "<h3>Java Programming</h3><p>OOP Concepts, Exception Handling, Multithreading, JDBC</p>"
+            })
+
+            .when("/python", {
+                template: "<h3>Python Programming</h3><p>Functions, Modules, File Handling, Data Science Basics</p>"
+            })
+
+            .when("/dbms", {
+                template: "<h3>Database Management System</h3><p>Normalization, SQL, Transactions, PL/SQL</p>"
+            })
+
+            .when("/networking", {
+                template: "<h3>Computer Networking</h3><p>OSI Model, TCP/IP, Routing, Network Security</p>"
+            })
+
+            .otherwise({
+                template: "<h3>Welcome to M.Sc (CS) Sem-II Syllabus</h3>"
+            });
+
+        });
+
+    </script>
 </head>
+
 <body>
 
-<a href="#/java">Java</a> |
-<a href="#/python">Python</a> |
-<a href="#/web">Web</a>
+    <h2>M.Sc (CS) Semester-II Syllabus</h2>
 
-<div ng-view></div>
+    <!-- Navigation Links -->
+    <a href="#!java">Java</a> |
+    <a href="#!python">Python</a> |
+    <a href="#!dbms">DBMS</a> |
+    <a href="#!networking">Networking</a>
 
-<script>
-var app = angular.module('myApp', ['ngRoute']);
+    <hr>
 
-app.config(function($routeProvider){
-    $routeProvider
-    .when('/java', {
-        template: '<h2>Java Syllabus</h2>'
-    })
-    .when('/python', {
-        template: '<h2>Python Syllabus</h2>'
-    })
-    .when('/web', {
-        template: '<h2>Full Stack Development Syllabus</h2>'
-    });
-});
-</script>
+    <!-- ng-view Directive -->
+    <div ng-view></div>
+
 </body>
+
 </html>
-```
 
 ## Q2) Display Student Details using ng-repeat
 
-(Use Slip 8 Q2 code)
+<!DOCTYPE html>
+<html ng-app="studentApp">
 
----
+<head>
+    <title>Student Details Table</title>
+
+    <!-- AngularJS Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+
+        // Create AngularJS App
+        var app = angular.module("studentApp", []);
+
+        // Create Controller
+        app.controller("studentController", function($scope) {
+
+            // Array of Student Details
+            $scope.students = [
+                { rollno: 1, name: "Amit", course: "M.Sc CS" },
+                { rollno: 2, name: "Sneha", course: "MCA" },
+                { rollno: 3, name: "Rahul", course: "BCA" },
+                { rollno: 4, name: "Pooja", course: "B.Sc" },
+                { rollno: 5, name: "Karan", course: "MBA" },
+                { rollno: 6, name: "Neha", course: "BBA" },
+                { rollno: 7, name: "Rohit", course: "M.Tech" },
+                { rollno: 8, name: "Simran", course: "B.Tech" },
+                { rollno: 9, name: "Arjun", course: "M.Sc IT" },
+                { rollno: 10, name: "Priya", course: "M.Com" }
+            ];
+
+        });
+
+    </script>
+</head>
+
+<body ng-controller="studentController">
+
+    <h2>Student Details</h2>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+
+        <!-- ng-repeat directive -->
+        <tr ng-repeat="student in students">
+            <td>{{ student.rollno }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.course }}</td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
 
 
 
