@@ -2,45 +2,132 @@
 
 ## Q1) Employee Registration Validation
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<script>
-function validate(){
-    let name = document.getElementById('name').value;
-    let email = document.getElementById('email').value;
+// file: employee.js
 
-    let namePattern = /^[A-Za-z ]+$/;
-    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+// Import HTTP module
+const http = require('http');
+const querystring = require('querystring');
 
-    if(!namePattern.test(name)){
-        alert('Invalid Name');
-        return false;
+// Create Server
+http.createServer((req, res) => {
+
+    // Display Form
+    if (req.method === "GET") {
+
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+
+        res.write(`
+            <html>
+            <body>
+
+                <h2>Employee Registration Form</h2>
+
+                <form method="POST">
+
+                    Employee Name:
+                    <input type="text" name="ename">
+                    <br><br>
+
+                    Email:
+                    <input type="text" name="email">
+                    <br><br>
+
+                    Age:
+                    <input type="number" name="age">
+                    <br><br>
+
+                    <input type="submit" value="Register">
+
+                </form>
+
+            </body>
+            </html>
+        `);
+
+        res.end();
     }
 
-    if(!emailPattern.test(email)){
-        alert('Invalid Email');
-        return false;
+    // Handle Form Submission
+    else if (req.method === "POST") {
+
+        let body = "";
+
+        req.on("data", chunk => {
+            body += chunk.toString();
+        });
+
+        req.on("end", () => {
+
+            let data = querystring.parse(body);
+
+            let ename = data.ename;
+            let email = data.email;
+            let age = data.age;
+
+            // Validation Patterns
+            let namePattern = /^[A-Za-z ]+$/;
+            let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+            // Name Validation
+            if (!namePattern.test(ename)) {
+                res.end("Invalid Employee Name");
+                return;
+            }
+
+            // Email Validation
+            if (!emailPattern.test(email)) {
+                res.end("Invalid Email ID");
+                return;
+            }
+
+            // Age Validation
+            if (age < 18 || age > 60) {
+                res.end("Age should be between 18 and 60");
+                return;
+            }
+
+            res.end("Employee Registration Successful!");
+        });
     }
 
-    alert('Registration Successful');
-}
-</script>
-</head>
-<body>
-<form onsubmit="return validate()">
-Name: <input type="text" id="name"><br><br>
-Email: <input type="text" id="email"><br><br>
-<input type="submit" value="Register">
-</form>
-</body>
-</html>
-```
+}).listen(3000);
+
+console.log("Server running at http://localhost:3000");
 
 ## Q2) Event Driven Application
 
-(Use Slip 7 Q2 code)
+// file: main.js
+
+// Import EventEmitter module
+const EventEmitter = require('events');
+
+// Create EventEmitter object
+const eventEmitter = new EventEmitter();
+
+// Callback Function
+const eventHandler = () => {
+
+    console.log("Event detected!");
+    console.log("Callback function executed successfully.");
+
+};
+
+// Listen for event named 'message'
+eventEmitter.on('message', eventHandler);
+
+// Main Loop
+console.log("Application is running...");
+console.log("Waiting for events...");
+
+// Trigger Event after 3 seconds
+setTimeout(() => {
+
+    console.log("Event Occurred!");
+
+    // Emit Event
+    eventEmitter.emit('message');
+
+}, 3000);
 
 ---
 
