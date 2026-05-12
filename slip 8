@@ -2,61 +2,89 @@
 
 ## Q1) Simple Web Server
 
-```javascript
+// file: server.js
+
+// Import HTTP module
 const http = require('http');
 
-http.createServer(function(req, res){
-    res.writeHead(200, {'Content-Type':'text/html'});
-    res.write('<h1>Welcome to Node.js Web Server</h1>');
-    res.end();
-}).listen(3000);
+// Create Web Server
+const server = http.createServer((req, res) => {
 
-console.log('Server running on port 3000');
-```
+    // Set response header
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+
+    // Send response
+    res.write("<h1>Welcome to Simple Node.js Web Server</h1>");
+    res.write("<p>Server is running successfully!</p>");
+
+    // End response
+    res.end();
+});
+
+// Listen on port 3000
+server.listen(3000, () => {
+    console.log("Server running at http://localhost:3000");
+});
 
 ## Q2) Display 10 Student Details using ng-repeat
 
-```html
 <!DOCTYPE html>
 <html ng-app="myApp">
+
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Student Details Table</title>
+
+    <!-- AngularJS Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+
+        // Create AngularJS App
+        var app = angular.module("myApp", []);
+
+        // Create Controller
+        app.controller("studentController", function ($scope) {
+
+            // Array of Student Data
+            $scope.students = [
+                { rollno: 1, name: "Amit", course: "BCA" },
+                { rollno: 2, name: "Sneha", course: "BSc" },
+                { rollno: 3, name: "Rahul", course: "MCA" },
+                { rollno: 4, name: "Priya", course: "BCom" },
+                { rollno: 5, name: "Karan", course: "MBA" },
+                { rollno: 6, name: "Neha", course: "BBA" },
+                { rollno: 7, name: "Rohit", course: "MSc" },
+                { rollno: 8, name: "Pooja", course: "BA" },
+                { rollno: 9, name: "Arjun", course: "BTech" },
+                { rollno: 10, name: "Simran", course: "MTech" }
+            ];
+
+        });
+
+    </script>
 </head>
-<body ng-controller="myCtrl">
 
-<table border="1">
-<tr>
-<th>Roll No</th>
-<th>Name</th>
-<th>Course</th>
-</tr>
+<body ng-controller="studentController">
 
-<tr ng-repeat="s in students">
-<td>{{s.roll}}</td>
-<td>{{s.name}}</td>
-<td>{{s.course}}</td>
-</tr>
-</table>
+    <h2>Student Details</h2>
 
-<script>
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope){
-    $scope.students = [
-        {roll:1,name:'Amit',course:'MSc'},
-        {roll:2,name:'Rahul',course:'MSc'},
-        {roll:3,name:'Sneha',course:'MSc'},
-        {roll:4,name:'Pooja',course:'MSc'},
-        {roll:5,name:'Karan',course:'MSc'},
-        {roll:6,name:'Neha',course:'MSc'},
-        {roll:7,name:'Rohit',course:'MSc'},
-        {roll:8,name:'Anjali',course:'MSc'},
-        {roll:9,name:'Priya',course:'MSc'},
-        {roll:10,name:'Ajay',course:'MSc'}
-    ];
-});
-</script>
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+
+        <!-- ng-repeat directive -->
+        <tr ng-repeat="student in students">
+            <td>{{ student.rollno }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.course }}</td>
+        </tr>
+
+    </table>
+
 </body>
-</html>
-```
 
----
+</html>
