@@ -2,54 +2,91 @@
 
 ## Q1) ng-click Alert Message
 
-```html
 <!DOCTYPE html>
 <html ng-app="myApp">
+
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>ng-click Example</title>
+
+    <!-- AngularJS Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+
+        // Create AngularJS App
+        var app = angular.module("myApp", []);
+
+        // Create Controller
+        app.controller("myController", function ($scope) {
+
+            // Function to display alert
+            $scope.showMessage = function () {
+                alert("Button Clicked Successfully!");
+            };
+
+        });
+
+    </script>
 </head>
-<body ng-controller="myCtrl">
 
-<button ng-click="showAlert()">Click Me</button>
+<body ng-controller="myController">
 
-<script>
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope){
-    $scope.showAlert = function(){
-        alert('Button Clicked');
-    }
-});
-</script>
+    <h2>AngularJS ng-click Example</h2>
+
+    <!-- Button with ng-click directive -->
+    <button ng-click="showMessage()">
+        Click Here
+    </button>
+
 </body>
+
 </html>
-```
 
 ## Q2) Open Requested File with 404 Error
 
-```javascript
+// file: server.js
+
+// Import modules
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
 
-http.createServer(function(req, res){
-    let q = url.parse(req.url, true);
-    let filename = '.' + q.pathname;
+// Create Server
+http.createServer(function (req, res) {
 
-    fs.readFile(filename, function(err, data){
-        if(err){
-            res.writeHead(404, {'Content-Type':'text/html'});
-            return res.end('404 Not Found');
+    // Parse requested URL
+    let q = url.parse(req.url, true);
+    let filename = "." + q.pathname;
+
+    // Read File
+    fs.readFile(filename, function (err, data) {
+
+        // If file not found
+        if (err) {
+            res.writeHead(404, { 'Content-Type': 'text/html' });
+            return res.end("404 Error: File Not Found");
         }
 
-        res.writeHead(200, {'Content-Type':'text/html'});
+        // If file found
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         res.write(data);
         return res.end();
-    });
+    });    
+
 }).listen(3000);
-```
 
----
-
+console.log("Server running at http://localhost:3000");
 
 
-(Use Slip 5 Q2 code)
+Example HTML File (index.html)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+
+    <h1>Welcome to Node.js Server</h1>
+
+</body>
+</html>
