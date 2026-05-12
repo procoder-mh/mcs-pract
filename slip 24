@@ -2,24 +2,103 @@
 
 ## Q1) eLearning System using Node.js
 
-```javascript
-const http = require('http');
+// file: elearning.js
 
-http.createServer(function(req, res){
-    res.writeHead(200, {'Content-Type':'text/html'});
+// eLearning System using Node.js
 
-    res.write('<h1>eLearning System</h1>');
-    res.write('<h3>Courses Available:</h3>');
-    res.write('<ul>');
-    res.write('<li>Java</li>');
-    res.write('<li>Python</li>');
-    res.write('<li>Full Stack Development</li>');
-    res.write('</ul>');
+const courses = [
+    {
+        id: 1,
+        courseName: "Web Development",
+        instructor: "Mr. Sharma",
+        duration: "3 Months"
+    },
+    {
+        id: 2,
+        courseName: "Python Programming",
+        instructor: "Ms. Patel",
+        duration: "2 Months"
+    },
+    {
+        id: 3,
+        courseName: "Data Science",
+        instructor: "Dr. Mehta",
+        duration: "6 Months"
+    }
+];
 
-    res.end();
-}).listen(3000);
-```
+// Display Courses
+console.log("===== eLearning System =====\n");
 
+courses.forEach(course => {
+    console.log("Course ID:", course.id);
+    console.log("Course Name:", course.courseName);
+    console.log("Instructor:", course.instructor);
+    console.log("Duration:", course.duration);
+    console.log("-----------------------------");
+});
 ## Q2) AngularJS Username Validation
 
-(Use Slip 5 Q2 code)
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>AngularJS Validation</title>
+
+    <!-- AngularJS Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+        // Create AngularJS App
+        var app = angular.module("myApp", []);
+
+        // Create Controller
+        app.controller("myController", function ($scope) {
+
+            $scope.validate = function () {
+
+                // Username blank validation
+                if (!$scope.username || $scope.username.trim() == "") {
+                    alert("Enter username");
+                    return;
+                }
+
+                // Username length validation
+                if ($scope.username.length < 3) {
+                    alert("Username is too short");
+                    return;
+                }
+
+                // Password validation
+                if (!$scope.password || $scope.password.length < 8) {
+                    alert("Password should be minimum 8 characters");
+                    return;
+                }
+
+                // Success message
+                alert("Valid username");
+            };
+        });
+    </script>
+</head>
+
+<body ng-controller="myController">
+
+    <h2>User Validation Form</h2>
+
+    <form ng-submit="validate()">
+
+        Username:
+        <input type="text" ng-model="username">
+        <br><br>
+
+        Password:
+        <input type="password" ng-model="password">
+        <br><br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+</body>
+</html>
