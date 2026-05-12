@@ -4,45 +4,78 @@
 
 ## Q1) Current Date and Time using Interval Service
 
-```html
 <!DOCTYPE html>
 <html ng-app="myApp">
+
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Current Date and Time</title>
+
+    <!-- AngularJS Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+
+        // Create AngularJS Application
+        var app = angular.module("myApp", []);
+
+        // Create Controller
+        app.controller("myController", function ($scope, $interval) {
+
+            // Function to update current date and time
+            $scope.currentDateTime = new Date();
+
+            // Update every second using interval service
+            $interval(function () {
+                $scope.currentDateTime = new Date();
+            }, 1000);
+
+        });
+
+    </script>
 </head>
-<body ng-controller="myCtrl">
 
-<h2>{{time}}</h2>
+<body ng-controller="myController">
 
-<script>
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope, $interval){
-    $interval(function(){
-        $scope.time = new Date().toLocaleString();
-    }, 1000);
-});
-</script>
+    <h2>Current Date and Time</h2>
+
+    <h3>{{ currentDateTime }}</h3>
+
 </body>
+
 </html>
-```
 
 ## Q2) Event Driven Application
 
-```javascript
-const events = require('events');
-const eventEmitter = new events.EventEmitter();
+// file: main.js
 
-const myEventHandler = function () {
-    console.log('Event Occurred!');
-}
+// Import EventEmitter module
+const EventEmitter = require('events');
 
-eventEmitter.on('display', myEventHandler);
+// Create EventEmitter object
+const eventEmitter = new EventEmitter();
 
-eventEmitter.emit('display');
-```
+// Callback Function
+const eventHandler = () => {
+    console.log("Event detected!");
+    console.log("Callback function executed successfully.");
+};
 
----
+// Listen for event named 'message'
+eventEmitter.on('message', eventHandler);
 
+// Main Loop Simulation
+console.log("Application is running...");
+console.log("Waiting for events...");
+
+// Trigger event after 3 seconds
+setTimeout(() => {
+
+    console.log("Event Occurred!");
+
+    // Emit event
+    eventEmitter.emit('message');
+
+}, 3000);
 
 
 
