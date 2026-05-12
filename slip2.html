@@ -2,34 +2,102 @@
 
 ## Q1) Reverse String in Node.js
 
-```javascript
-let str = "Full Stack!";
-let rev = str.split('').reverse().join('');
-console.log(rev);
-```
+// file: reverse.js
+
+// Original String
+let text = "Full Stack!";
+
+// Reverse String
+let reversedText = text.split("").reverse().join("");
+
+// Display Output
+console.log("Original String: " + text);
+console.log("Reversed String: " + reversedText);
 
 ## Q2) Append One File into Another
 
-```javascript
+// file: appendfile.js
+
+// Import Modules
+const http = require('http');
 const fs = require('fs');
-const readline = require('readline');
+const querystring = require('querystring');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// Create Server
+http.createServer((req, res) => {
 
-rl.question('Enter first file name: ', (file1) => {
-    rl.question('Enter second file name: ', (file2) => {
+    // Display Form
+    if (req.method === "GET") {
 
-        let data = fs.readFileSync(file1, 'utf8');
-        fs.appendFileSync(file2, data);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
 
-        console.log('File appended successfully');
-        rl.close();
-    });
-});
-```
+        res.write(`
+            <html>
+            <body>
 
+                <h2>Append File Contents</h2>
+
+                <form method="POST">
+
+                    First File Name:
+                    <input type="text" name="file1">
+                    <br><br>
+
+                    Second File Name:
+                    <input type="text" name="file2">
+                    <br><br>
+
+                    <input type="submit" value="Append">
+
+                </form>
+
+            </body>
+            </html>
+        `);
+
+        res.end();
+    }
+
+    // Handle Form Submission
+    else if (req.method === "POST") {
+
+        let body = "";
+
+        req.on("data", chunk => {
+            body += chunk.toString();
+        });
+
+        req.on("end", () => {
+
+            let data = querystring.parse(body);
+
+            let file1 = data.file1;
+            let file2 = data.file2;
+
+            // Read first file
+            fs.readFile(file1, 'utf8', (err, content) => {
+
+                if (err) {
+                    res.end("Error reading first file");
+                    return;
+                }
+
+                // Append content to second file
+                fs.appendFile(file2, content, (err) => {
+
+                    if (err) {
+                        res.end("Error appending to second file");
+                        return;
+                    }
+
+                    res.end("Contents of first file appended to second file successfully!");
+                });
+            });
+        });
+    }
+
+}).listen(3000);
+
+console.log("Server running at http://localhost:3000");
 ---
 
