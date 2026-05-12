@@ -3,25 +3,65 @@
 
 ## Q1) Recipe Book using Node.js
 
-```javascript
-const http = require('http');
+// file: recipebook.js
 
-http.createServer(function(req, res){
-    res.writeHead(200, {'Content-Type':'text/html'});
+// Recipe Book using Node.js
 
-    res.write('<h1>Recipe Book</h1>');
-    res.write('<h3>1. Tea</h3>');
-    res.write('<p>Boil water, add tea powder, milk and sugar.</p>');
+const recipes = [
+    {
+        id: 1,
+        name: "Pav Bhaji",
+        ingredients: ["Potato", "Tomato", "Butter", "Pav"],
+        preparationTime: "30 Minutes"
+    },
+    {
+        id: 2,
+        name: "Veg Biryani",
+        ingredients: ["Rice", "Vegetables", "Spices"],
+        preparationTime: "45 Minutes"
+    },
+    {
+        id: 3,
+        name: "Masala Dosa",
+        ingredients: ["Rice Batter", "Potato", "Masala"],
+        preparationTime: "25 Minutes"
+    }
+];
 
-    res.write('<h3>2. Maggi</h3>');
-    res.write('<p>Boil water, add noodles and tastemaker.</p>');
+// Display all recipes
+console.log("===== RECIPE BOOK =====\n");
 
-    res.end();
-}).listen(3000);
-```
+recipes.forEach(recipe => {
+    console.log("Recipe ID:", recipe.id);
+    console.log("Recipe Name:", recipe.name);
+    console.log("Ingredients:", recipe.ingredients.join(", "));
+    console.log("Preparation Time:", recipe.preparationTime);
+    console.log("----------------------------");
+});
 
 ## Q2) Event Driven Application
 
-(Use Slip 7 Q2 code)
+// file: main.js
 
----
+// Import events module
+const EventEmitter = require('events');
+
+// Create object of EventEmitter
+const eventEmitter = new EventEmitter();
+
+// Callback function
+const myEventHandler = () => {
+    console.log("Event detected and callback function executed!");
+};
+
+// Listen for event named 'message'
+eventEmitter.on('message', myEventHandler);
+
+// Main loop simulation
+console.log("Application is running and waiting for events...");
+
+// Trigger the event after 3 seconds
+setTimeout(() => {
+    console.log("Event Occurred!");
+    eventEmitter.emit('message');
+}, 3000);
