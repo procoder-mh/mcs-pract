@@ -3,86 +3,133 @@
 
 ## Q1) Login Form Validation
 
-```html
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login Form</title>
-<script>
-function validateForm() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+    <title>Login Form Validation</title>
 
-    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    let passwordPattern = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
+    <script>
 
-    if(!emailPattern.test(email)) {
-        alert("Invalid Email");
-        return false;
-    }
+        function validateForm() {
 
-    if(!passwordPattern.test(password)) {
-        alert("Password must contain 8 characters, one uppercase and one number");
-        return false;
-    }
+            // Get values
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
 
-    alert("Login Successful");
-}
-</script>
+            // Regular Expression for Email
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Regular Expression for Password
+            // Minimum 8 characters, at least one number and one special character
+            let passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
+
+            // Email Validation
+            if (!emailPattern.test(email)) {
+                alert("Invalid Email ID");
+                return false;
+            }
+
+            // Password Validation
+            if (!passwordPattern.test(password)) {
+                alert("Password must contain minimum 8 characters, one number and one special character");
+                return false;
+            }
+
+            alert("Login Successful");
+            return true;
+        }
+
+    </script>
 </head>
+
 <body>
-<form onsubmit="return validateForm()">
-Email: <input type="text" id="email"><br><br>
-Password: <input type="password" id="password"><br><br>
-<input type="submit" value="Login">
-</form>
+
+    <h2>Login Form</h2>
+
+    <form onsubmit="return validateForm()">
+
+        Email ID:
+        <input type="text" id="email">
+        <br><br>
+
+        Password:
+        <input type="password" id="password">
+        <br><br>
+
+        <input type="submit" value="Login">
+
+    </form>
+
 </body>
 </html>
-```
 
 ## Q2) Student Registration Validation
 
-```html
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-function validate() {
-    let fname = document.getElementById("fname").value;
-    let lname = document.getElementById("lname").value;
-    let age = document.getElementById("age").value;
+    <title>Student Registration Form</title>
 
-    let namePattern = /^[A-Za-z]+$/;
+    <script>
 
-    if(!namePattern.test(fname)) {
-        alert("Invalid First Name");
-        return false;
-    }
+        function validateStudentForm() {
 
-    if(!namePattern.test(lname)) {
-        alert("Invalid Last Name");
-        return false;
-    }
+            // Get values
+            let fname = document.getElementById("fname").value;
+            let lname = document.getElementById("lname").value;
+            let age = document.getElementById("age").value;
 
-    if(age < 18 || age > 50) {
-        alert("Age must be between 18 and 50");
-        return false;
-    }
+            // Regular Expression for Alphabets Only
+            let namePattern = /^[A-Za-z]+$/;
 
-    alert("Registration Successful");
-}
-</script>
+            // First Name Validation
+            if (!namePattern.test(fname)) {
+                alert("First name should contain only alphabets");
+                return false;
+            }
+
+            // Last Name Validation
+            if (!namePattern.test(lname)) {
+                alert("Last name should contain only alphabets");
+                return false;
+            }
+
+            // Age Validation
+            if (age < 18 || age > 50) {
+                alert("Age should be between 18 and 50");
+                return false;
+            }
+
+            alert("Registration Successful");
+            return true;
+        }
+
+    </script>
 </head>
+
 <body>
-<form onsubmit="return validate()">
-First Name: <input type="text" id="fname"><br><br>
-Last Name: <input type="text" id="lname"><br><br>
-Age: <input type="number" id="age"><br><br>
-<input type="submit" value="Register">
-</form>
+
+    <h2>Student Registration Form</h2>
+
+    <form onsubmit="return validateStudentForm()">
+
+        First Name:
+        <input type="text" id="fname">
+        <br><br>
+
+        Last Name:
+        <input type="text" id="lname">
+        <br><br>
+
+        Age:
+        <input type="number" id="age">
+        <br><br>
+
+        <input type="submit" value="Register">
+
+    </form>
+
 </body>
 </html>
-```
-
 ---
 
