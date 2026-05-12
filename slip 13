@@ -2,13 +2,76 @@
 
 ## Q1) Convert HELLO WORLD into Lowercase
 
-```javascript
-let str = 'HELLO WORLD!';
-console.log(str.toLowerCase());
-```
+// file: lowercase.js
+
+let text = "HELLO WORLD!";
+
+// Convert to lowercase
+let result = text.toLowerCase();
+
+// Display output
+console.log(result);
 
 ## Q2) Student Registration Validation
 
-(Use Slip 1 Q2 code)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
 
----
+    <script>
+        function validateForm() {
+
+            // Get values
+            let fname = document.forms["studentForm"]["fname"].value;
+            let lname = document.forms["studentForm"]["lname"].value;
+            let age = document.forms["studentForm"]["age"].value;
+
+            // Alphabet validation
+            let namePattern = /^[A-Za-z]+$/;
+
+            // First Name Validation
+            if (!namePattern.test(fname)) {
+                alert("First name should contain only alphabets");
+                return false;
+            }
+
+            // Last Name Validation
+            if (!namePattern.test(lname)) {
+                alert("Last name should contain only alphabets");
+                return false;
+            }
+
+            // Age Validation
+            if (age < 18 || age > 50) {
+                alert("Age should be between 18 and 50");
+                return false;
+            }
+
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>Student Registration Form</h2>
+
+    <form name="studentForm" onsubmit="return validateForm()">
+
+        First Name:
+        <input type="text" name="fname"><br><br>
+
+        Last Name:
+        <input type="text" name="lname"><br><br>
+
+        Age:
+        <input type="number" name="age"><br><br>
+
+        <input type="submit" value="Register">
+
+    </form>
+
+</body>
+</html>
